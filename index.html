@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeffrey Groh</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THEME — edit these variables to change colors site-wide
+   ============================================================ */
+:root {
+  --bg:#f7f6f2;--paper:#fff;--ink:#181816;--ink2:#616158;--ink3:#a8a89e;--rule:#e8e6e0;--accent:#2060a8;
+  --s-bg:#171715;--s-acc:#4d8fd4;--s-border:#242420;
+  --serif:'DM Serif Display',Georgia,serif;--mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--mono);background:var(--bg);color:var(--ink);font-size:13px;line-height:1.7}
+a{color:inherit;text-decoration:none}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh;max-width:860px;margin:0 auto}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar{background:var(--s-bg);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;border-right:1px solid var(--s-border);overflow:hidden}
+.s-top{padding:1.5rem 1.5rem 1.25rem;flex-shrink:0}
+.s-name{font-family:var(--serif);font-size:1.25rem;line-height:1.1;color:#e4e2d8;margin-bottom:0.2rem}
+.s-name em{font-style:italic;color:var(--s-acc)}
+.s-role{font-size:9px;color:#888880;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem}
+.s-nav{display:flex;flex-direction:column;gap:0}
+.s-nav button{
+  font-family:var(--mono);font-size:11px;color:#b8b8ae;
+  padding:5px 6px;display:flex;align-items:center;gap:6px;
+  border-radius:2px;letter-spacing:0.02em;
+  transition:color 0.12s,background 0.12s;
+  cursor:pointer;background:none;border:none;text-align:left;width:100%;
+}
+.s-nav button::before{content:'';width:2px;height:2px;background:#555550;border-radius:50%;flex-shrink:0;transition:background 0.12s}
+.s-nav button:hover{color:#e4e2d8;background:rgba(77,143,212,0.07)}
+.s-nav button:hover::before{background:var(--s-acc)}
+.s-nav button.active{color:var(--s-acc);background:rgba(77,143,212,0.07)}
+.s-nav button.active::before{background:var(--s-acc)}
+
+/* Sidebar photo — fills remaining space
+   To add: remove .s-photo-ph div, uncomment <img> tag */
+.s-photo-tall{flex:1;overflow:hidden;position:relative;min-height:0}
+.s-photo-tall img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:brightness(0.88) contrast(1.05)}
+.s-photo-tall::before{content:'';position:absolute;top:0;left:0;right:0;height:30%;background:linear-gradient(to bottom,var(--s-bg),transparent);pointer-events:none;z-index:1}
+.s-photo-ph{width:100%;height:100%;background:#1a1a18;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;border-top:1px solid var(--s-border)}
+.s-photo-ph span{font-family:var(--serif);font-size:2rem;font-style:italic;color:#2a2a26}
+.s-photo-ph small{font-size:9px;color:#2a2a26;letter-spacing:0.1em;text-transform:uppercase}
+
+.s-links{padding:1rem 1.5rem;flex-shrink:0;display:flex;flex-direction:column;gap:0.35rem;border-top:1px solid var(--s-border)}
+.s-links a{font-size:10px;color:#888880;display:flex;align-items:center;gap:5px;transition:color 0.12s}
+.s-links a:hover{color:var(--s-acc)}
+
+/* ============================================================
+   MAIN / PANELS
+   ============================================================ */
+.main{padding:2.5rem;overflow-y:auto;height:100vh}
+.panel{display:none}
+.panel.active{display:block}
+.sh{display:flex;align-items:center;gap:0.6rem;margin-bottom:1.5rem}
+.sh-title{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--ink)}
+.sh-line{flex:1;height:1px;background:var(--rule)}
+
+/* ============================================================
+   HOME
+   ============================================================ */
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:3rem}
+.about{font-size:12.5px;color:var(--ink2);line-height:1.8}
+
+/* Home photo
+   To add: remove .home-photo-ph div, uncomment <img> tag */
+.home-photo{width:100%;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--rule);background:var(--paper)}
+.home-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.home-photo-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;min-height:200px}
+.home-photo-ph span{font-family:var(--serif);font-size:1.5rem;font-style:italic;color:var(--ink3)}
+.home-photo-ph small{font-size:9px;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase}
+
+/* Home gif
+   To add: remove .gif-ph div, uncomment <img> tag, update src and caption
+   To remove: delete .gif-wrap div */
+.gif-wrap{margin-top:1.25rem;border:1px solid var(--rule);background:var(--paper)}
+.gif-wrap img{width:100%;display:block}
+.gif-cap{font-size:10px;color:var(--ink3);padding:0.5rem 0.75rem;border-top:1px solid var(--rule)}
+.gif-ph{padding:1.5rem;text-align:center;font-size:10px;color:var(--ink3);border:1px dashed var(--rule)}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
+.c-item{background:var(--paper);border:1px solid var(--rule);padding:0.75rem 1rem}
+.c-key{font-size:9px;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem}
+.c-val{font-size:11px;color:var(--ink)}
+.c-val a{color:var(--accent)}
+.c-val a:hover{opacity:0.7}
+
+/* ============================================================
+   RESEARCH — scrolling sections
+   Copy a .research-section block to add more.
+   Each section: title, body, tags, optional figure.
+   ============================================================ */
+.research-section{margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--rule)}
+.research-section:last-child{border-bottom:none;margin-bottom:1rem}
+.rs-title{font-family:var(--serif);font-size:1.15rem;font-style:italic;color:var(--ink);margin-bottom:0.75rem}
+.rs-body{font-size:12.5px;color:var(--ink2);line-height:1.9;max-width:540px;margin-bottom:1.25rem}
+.rs-tags{display:flex;gap:0.3rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.tag{font-size:9px;background:var(--bg);border:1px solid var(--rule);color:var(--ink3);padding:1px 6px;border-radius:2px}
+
+/* Figure slot (research sections)
+   To add a figure:
+     1. Put the file in the same folder as index.html
+     2. Remove the .fig-ph div
+     3. Uncomment the <img> tag and set src
+     4. Update the caption
+   Accepts .png, .jpg, or .gif — gifs loop automatically.
+   To remove: delete the whole .fig-wrap div */
+.fig-wrap{border:1px solid var(--rule);background:var(--paper);max-width:520px}
+.fig-wrap img{width:100%;display:block}
+.fig-cap{font-size:10px;color:var(--ink3);padding:0.5rem 0.75rem;border-top:1px solid var(--rule);line-height:1.5}
+.fig-ph{padding:2rem;text-align:center;font-size:10px;color:var(--ink3);border:1px dashed var(--rule)}
+
+/* ============================================================
+   PUBLICATIONS
+   Uncomment <ul> block when you have papers.
+   Copy a .pub block to add more.
+   ============================================================ */
+.pub-ph{font-size:10px;color:var(--ink3);padding:1.25rem;border:1px dashed var(--rule);text-align:center}
+.pub-list{list-style:none;display:flex;flex-direction:column}
+.pub{display:grid;grid-template-columns:2.75rem 1fr;gap:0.75rem;padding:0.875rem 0;border-bottom:1px solid var(--rule)}
+.pub:first-child{border-top:1px solid var(--rule)}
+.pub-year{font-size:10px;color:var(--ink3);padding-top:2px}
+.pub-title{font-family:var(--serif);font-size:0.9rem;font-style:italic;color:var(--ink);margin-bottom:0.15rem}
+.pub-authors{font-size:10.5px;color:var(--ink2);margin-bottom:0.1rem}
+.pub-venue{font-size:10px;color:var(--ink3)}
+.pub-doi{font-size:10px;color:var(--accent);margin-left:0.5rem}
+
+/* ============================================================
+   CV — upload groh_cv.pdf to repo root
+   ============================================================ */
+.cv{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:var(--paper);border:1px solid var(--rule)}
+.cv-label{font-size:11px;color:var(--ink2)}
+.cv-label code{font-size:10px;background:var(--bg);border:1px solid var(--rule);padding:1px 5px;color:var(--ink3);border-radius:2px}
+.cv-dl{font-size:10px;background:var(--s-bg);color:#e4e2d8;padding:5px 14px;border-radius:2px;transition:background 0.12s}
+.cv-dl:hover{background:#2a2a26}
+
+footer{font-size:10px;color:var(--ink3);padding-top:0.75rem;border-top:1px solid var(--rule);margin-top:3rem}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:600px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto}
+  .s-photo-tall{height:200px}
+  .home-grid{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr}
+  .main{padding:2rem 1.25rem;height:auto}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- =========================================================
+       SIDEBAR
+       ========================================================= -->
+  <aside class="sidebar">
+    <div class="s-top">
+      <div class="s-name">Jeffrey<br><em>Groh</em></div>
+      <div class="s-role">Evolutionary Geneticist</div>
+      <nav class="s-nav">
+        <button class="active" onclick="show('home',this)">home</button>
+        <button onclick="show('research',this)">research</button>
+        <button onclick="show('publications',this)">publications</button>
+        <button onclick="show('cv',this)">cv</button>
+      </nav>
+    </div>
+
+    <div class="s-photo-tall">
+      <div class="s-photo-ph">
+        <span>JG</span>
+        <small>photo here</small>
+      </div>
+      <!-- To add photo: remove div above and uncomment:
+      <img src="photo.jpg" alt="Jeffrey Groh"> -->
+    </div>
+
+    <div class="s-links">
+      <a href="https://github.com/jgroh">⌥ github.com/jgroh</a>
+      <a href="mailto:jgroh@berkeley.edu">@ jgroh@berkeley.edu</a>
+    </div>
+  </aside>
+
+  <!-- =========================================================
+       MAIN CONTENT
+       ========================================================= -->
+  <main class="main">
+
+    <!-- HOME -->
+    <div id="home" class="panel active">
+      <div class="sh"><span class="sh-title">About</span><div class="sh-line"></div></div>
+      <div class="home-grid">
+        <div>
+          <p class="about">
+        I'm an evolutionary geneticist interested in the origin and maintenance of variation in genes, traits, and species. My current research focuses on the evolution, ecology, and molecular biology of mating systems as a window into convergent adaptation, the origin of novelty, and the genetic architecture of ecologically significant traits. I am particularly interested in flowering plants as a model for understanding the resolution of sexual conflict in hermaphrodites. Other research interests include population divergence, consequences of hybridization, and temporal niche specialization. I'm currently a Miller Postdoctoral Fellow at UC Berkeley working with Noah Whiteman and Ben Blackman. Prior to this I completed my PhD in Population Biology at UC Davis with Graham Coop. 
+          </p>
+          <div class="gif-wrap">
+            <!-- To add gif: remove .gif-ph div and uncomment:
+            <img src="figure.gif" alt="Description"> -->
+            <div class="gif-ph">[ gif — set src="your-figure.gif" ]</div>
+            <div class="gif-cap">Figure caption.</div>
+          </div>
+        </div>
+        <div class="home-photo">
+          <!-- To add photo: remove .home-photo-ph div and uncomment:
+          <img src="photo.jpg" alt="Jeffrey Groh"> -->
+          <div class="home-photo-ph">
+            <span>JG</span>
+            <small>photo here</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="sh"><span class="sh-title">Contact</span><div class="sh-line"></div></div>
+      <div class="contact">
+        <div class="c-item">
+          <div class="c-key">email</div>
+          <div class="c-val"><a href="mailto:jgroh@berkeley.edu">jgroh@berkeley.edu</a></div>
+        </div>
+        <div class="c-item">
+          <div class="c-key">github</div>
+          <div class="c-val"><a href="https://github.com/jgroh">github.com/jgroh</a></div>
+        </div>
+      </div>
+
+      <footer>jeffrey groh · 2026</footer>
+    </div>
+
+    <!-- RESEARCH — scrolling sections
+         Copy a .research-section block to add or remove sections. -->
+    <div id="research" class="panel">
+      <div class="sh"><span class="sh-title">Research</span><div class="sh-line"></div></div>
+
+      <div class="research-section">
+        <div class="rs-title">Evolution of Alternating Sexes In Flowering Plants</div>
+        <p class="rs-body"></p>
+        <div class="fig-wrap">
+          <img src="walnut_fig.pdf" alt="Description"> -->
+          <div class="fig-cap">...</div>
+        </div>
+      </div>
+
+      <div class="research-section">
+        <div class="rs-title">Consequences of Hybridization</div>
+        <p class="rs-body">
+        </p>
+        <div class="fig-wrap">
+          <!-- <img src="figure2.png" alt="Description"> -->
+          <div class="fig-ph">[ figure — set src="figure2.png" or "figure2.gif" ]</div>
+          <div class="fig-cap">...</div>
+        </div>
+      </div>
+
+      <div class="research-section">
+        <div class="rs-title">Population Genomics</div>
+        <p class="rs-body"></p>
+        <div class="rs-tags">
+          <span class="tag">bash</span>
+          <span class="tag">Snakemake</span>
+        </div>
+        <div class="fig-wrap">
+          <!-- <img src="figure3.png" alt="Description"> -->
+          <div class="fig-ph">[ figure — set src="figure3.png" or "figure3.gif" ]</div>
+          <div class="fig-cap">...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PUBLICATIONS — uncomment <ul> block when you have papers -->
+    <div id="publications" class="panel">
+      <div class="sh"><span class="sh-title">Publications</span><div class="sh-line"></div></div>
+      <!--
+      <ul class="pub-list">
+        <li class="pub">
+          <span class="pub-year">2024</span>
+          <div>
+            <div class="pub-title">Title of the paper</div>
+            <div class="pub-authors">Groh J, Author B, Author C</div>
+            <div class="pub-venue">Journal Name · Vol(Issue):pages
+              <a class="pub-doi" href="https://doi.org/...">doi ↗</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      -->
+      <div class="pub-ph">publications will appear here</div>
+    </div>
+
+    <!-- CV — upload groh_cv.pdf to repo root -->
+    <div id="cv" class="panel">
+      <div class="sh"><span class="sh-title">CV</span><div class="sh-line"></div></div>
+      <div class="cv">
+        <span class="cv-label">Curriculum vitae — <code>J.S.Groh_CV.pdf</code></span>
+        <a class="cv-dl" href="J.S.Groh_CV.pdf">Download</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.s-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  document.querySelector('.main').scrollTop = 0;
+}
+</script>
+</body>
+</html>
