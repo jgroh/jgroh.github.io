@@ -10,26 +10,21 @@
    THEME — edit these variables to change colors site-wide
    ============================================================ */
 :root {
-  --bg:#f7f6f2;--paper:#fff;--ink:#181816;--ink2:#616158;--ink3:#a8a89e;--rule:#e8e6e0;--accent:#2060a8;
-  --s-bg:#171715;--s-acc:#4d8fd4;--s-border:#242420;
+  --bg:#f7f6f2;--paper:#fff;--ink:#181816;--ink2:#616158;--ink3:#a8a89e;--rule:#e8e6e0;--accent:#2a7a3b;
+  --s-bg:#171715;--s-acc:#4a9e5c;--s-border:#242420;
   --serif:'DM Serif Display',Georgia,serif;--mono:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--mono);background:var(--bg);color:var(--ink);font-size:13px;line-height:1.7}
 a{color:inherit;text-decoration:none}
 
-/* ============================================================
-   LAYOUT
-   ============================================================ */
 .layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh;max-width:860px;margin:0 auto}
 
-/* ============================================================
-   SIDEBAR
-   ============================================================ */
+/* sidebar */
 .sidebar{background:var(--s-bg);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;border-right:1px solid var(--s-border);overflow:hidden}
 .s-top{padding:1.5rem 1.5rem 1.25rem;flex-shrink:0}
 .s-name{font-family:var(--serif);font-size:1.25rem;line-height:1.1;color:#e4e2d8;margin-bottom:0.2rem}
-.s-name em{font-style:italic;color:var(--s-acc)}
+.s-name em{font-style:normal;color:var(--s-acc)}
 .s-role{font-size:9px;color:#888880;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem}
 .s-nav{display:flex;flex-direction:column;gap:0}
 .s-nav button{
@@ -45,22 +40,14 @@ a{color:inherit;text-decoration:none}
 .s-nav button.active{color:var(--s-acc);background:rgba(77,143,212,0.07)}
 .s-nav button.active::before{background:var(--s-acc)}
 
-/* Sidebar photo — fills remaining space
-   To add: remove .s-photo-ph div, uncomment <img> tag */
-.s-photo-tall{flex:1;overflow:hidden;position:relative;min-height:0}
-.s-photo-tall img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:brightness(0.88) contrast(1.05)}
-.s-photo-tall::before{content:'';position:absolute;top:0;left:0;right:0;height:30%;background:linear-gradient(to bottom,var(--s-bg),transparent);pointer-events:none;z-index:1}
-.s-photo-ph{width:100%;height:100%;background:#1a1a18;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;border-top:1px solid var(--s-border)}
-.s-photo-ph span{font-family:var(--serif);font-size:2rem;font-style:italic;color:#2a2a26}
-.s-photo-ph small{font-size:9px;color:#2a2a26;letter-spacing:0.1em;text-transform:uppercase}
+.s-gif{border-top:1px solid var(--s-border);overflow:hidden;flex-shrink:0;margin-top:-1rem}
+.s-gif img{width:100%;display:block}
 
 .s-links{padding:1rem 1.5rem;flex-shrink:0;display:flex;flex-direction:column;gap:0.35rem;border-top:1px solid var(--s-border)}
 .s-links a{font-size:10px;color:#888880;display:flex;align-items:center;gap:5px;transition:color 0.12s}
 .s-links a:hover{color:var(--s-acc)}
 
-/* ============================================================
-   MAIN / PANELS
-   ============================================================ */
+/* main */
 .main{padding:2.5rem;overflow-y:auto;height:100vh}
 .panel{display:none}
 .panel.active{display:block}
@@ -68,31 +55,16 @@ a{color:inherit;text-decoration:none}
 .sh-title{font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--ink)}
 .sh-line{flex:1;height:1px;background:var(--rule)}
 
-/* ============================================================
-   HOME
-   ============================================================ */
-.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:3rem}
-.about{font-size:12.5px;color:var(--ink2);line-height:1.8}
-
-/* Home photo
-   To add: remove .home-photo-ph div, uncomment <img> tag */
-.home-photo{width:100%;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--rule);background:var(--paper)}
+/* home */
+.home-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;align-items:start;margin-bottom:3rem}
+.about{font-size:12.5px;color:var(--ink2);line-height:1.8;white-space:pre-line}
+.home-photo{width:100%;max-width:160px;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--rule);background:var(--paper);justify-self:end}
 .home-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 .home-photo-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;min-height:200px}
 .home-photo-ph span{font-family:var(--serif);font-size:1.5rem;font-style:italic;color:var(--ink3)}
 .home-photo-ph small{font-size:9px;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase}
 
-/* Home gif
-   To add: remove .gif-ph div, uncomment <img> tag, update src and caption
-   To remove: delete .gif-wrap div */
-.gif-wrap{margin-top:1.25rem;border:1px solid var(--rule);background:var(--paper)}
-.gif-wrap img{width:100%;display:block}
-.gif-cap{font-size:10px;color:var(--ink3);padding:0.5rem 0.75rem;border-top:1px solid var(--rule)}
-.gif-ph{padding:1.5rem;text-align:center;font-size:10px;color:var(--ink3);border:1px dashed var(--rule)}
-
-/* ============================================================
-   CONTACT
-   ============================================================ */
+/* contact */
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
 .c-item{background:var(--paper);border:1px solid var(--rule);padding:0.75rem 1rem}
 .c-key{font-size:9px;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem}
@@ -100,49 +72,34 @@ a{color:inherit;text-decoration:none}
 .c-val a{color:var(--accent)}
 .c-val a:hover{opacity:0.7}
 
-/* ============================================================
-   RESEARCH — scrolling sections
-   Copy a .research-section block to add more.
-   Each section: title, body, tags, optional figure.
-   ============================================================ */
+/* research */
 .research-section{margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--rule)}
 .research-section:last-child{border-bottom:none;margin-bottom:1rem}
 .rs-title{font-family:var(--serif);font-size:1.15rem;font-style:italic;color:var(--ink);margin-bottom:0.75rem}
 .rs-body{font-size:12.5px;color:var(--ink2);line-height:1.9;max-width:540px;margin-bottom:1.25rem}
 .rs-tags{display:flex;gap:0.3rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .tag{font-size:9px;background:var(--bg);border:1px solid var(--rule);color:var(--ink3);padding:1px 6px;border-radius:2px}
-
-/* Figure slot (research sections)
-   To add a figure:
-     1. Put the file in the same folder as index.html
-     2. Remove the .fig-ph div
-     3. Uncomment the <img> tag and set src
-     4. Update the caption
-   Accepts .png, .jpg, or .gif — gifs loop automatically.
-   To remove: delete the whole .fig-wrap div */
 .fig-wrap{border:1px solid var(--rule);background:var(--paper);max-width:520px}
 .fig-wrap img{width:100%;display:block}
 .fig-cap{font-size:10px;color:var(--ink3);padding:0.5rem 0.75rem;border-top:1px solid var(--rule);line-height:1.5}
 .fig-ph{padding:2rem;text-align:center;font-size:10px;color:var(--ink3);border:1px dashed var(--rule)}
 
-/* ============================================================
-   PUBLICATIONS
-   Uncomment <ul> block when you have papers.
-   Copy a .pub block to add more.
-   ============================================================ */
-.pub-ph{font-size:10px;color:var(--ink3);padding:1.25rem;border:1px dashed var(--rule);text-align:center}
-.pub-list{list-style:none;display:flex;flex-direction:column}
-.pub{display:grid;grid-template-columns:2.75rem 1fr;gap:0.75rem;padding:0.875rem 0;border-bottom:1px solid var(--rule)}
-.pub:first-child{border-top:1px solid var(--rule)}
-.pub-year{font-size:10px;color:var(--ink3);padding-top:2px}
-.pub-title{font-family:var(--serif);font-size:0.9rem;font-style:italic;color:var(--ink);margin-bottom:0.15rem}
-.pub-authors{font-size:10.5px;color:var(--ink2);margin-bottom:0.1rem}
-.pub-venue{font-size:10px;color:var(--ink3)}
-.pub-doi{font-size:10px;color:var(--accent);margin-left:0.5rem}
+/* publications */
+.pub-list{list-style:none;display:flex;flex-direction:column;gap:1.25rem}
+.pub-item{font-size:12.5px;color:var(--ink2);line-height:1.8;padding-bottom:1.25rem;border-bottom:1px solid var(--rule)}
+.pub-item:last-child{border-bottom:none}
+.pub-item em{font-style:italic;color:var(--ink)}
+.pub-item strong{font-weight:500;color:var(--ink)}
+.pub-item a{color:var(--accent)}
+.pub-item a:hover{opacity:0.7}
+.pub-note{font-size:10px;color:var(--ink3);margin-left:0.4rem}
+.pub-section-head{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:1rem;margin-top:2rem;padding-bottom:0.4rem;border-bottom:1px solid var(--rule)}
+.pub-section-head:first-child{margin-top:0}
+.pub-item-inner{display:flex;align-items:flex-start;gap:0.75rem}
+.pub-thumb{width:104px;flex-shrink:0;border:1px solid var(--rule)}
+.pub-thumb img{width:100%;display:block}
 
-/* ============================================================
-   CV — upload groh_cv.pdf to repo root
-   ============================================================ */
+/* cv */
 .cv{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:var(--paper);border:1px solid var(--rule)}
 .cv-label{font-size:11px;color:var(--ink2)}
 .cv-label code{font-size:10px;background:var(--bg);border:1px solid var(--rule);padding:1px 5px;color:var(--ink3);border-radius:2px}
@@ -151,13 +108,9 @@ a{color:inherit;text-decoration:none}
 
 footer{font-size:10px;color:var(--ink3);padding-top:0.75rem;border-top:1px solid var(--rule);margin-top:3rem}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media(max-width:600px){
   .layout{grid-template-columns:1fr}
   .sidebar{position:static;height:auto}
-  .s-photo-tall{height:200px}
   .home-grid{grid-template-columns:1fr}
   .contact{grid-template-columns:1fr}
   .main{padding:2rem 1.25rem;height:auto}
@@ -167,9 +120,6 @@ footer{font-size:10px;color:var(--ink3);padding-top:0.75rem;border-top:1px solid
 <body>
 <div class="layout">
 
-  <!-- =========================================================
-       SIDEBAR
-       ========================================================= -->
   <aside class="sidebar">
     <div class="s-top">
       <div class="s-name">Jeffrey<br><em>Groh</em></div>
@@ -182,24 +132,16 @@ footer{font-size:10px;color:var(--ink3);padding-top:0.75rem;border-top:1px solid
       </nav>
     </div>
 
-    <div class="s-photo-tall">
-      <div class="s-photo-ph">
-        <span>JG</span>
-        <small>photo here</small>
-      </div>
-      <!-- To add photo: remove div above and uncomment:
-      <img src="photo.jpg" alt="Jeffrey Groh"> -->
+    <div class="s-gif">
+      <img src="avo_fls.gif" alt="Avocado flowers">
     </div>
 
     <div class="s-links">
-      <a href="https://github.com/jgroh">⌥ github.com/jgroh</a>
       <a href="mailto:jgroh@berkeley.edu">@ jgroh@berkeley.edu</a>
+      <a href="https://github.com/jgroh">⌥ github.com/jgroh</a>
     </div>
   </aside>
 
-  <!-- =========================================================
-       MAIN CONTENT
-       ========================================================= -->
   <main class="main">
 
     <!-- HOME -->
@@ -207,102 +149,119 @@ footer{font-size:10px;color:var(--ink3);padding-top:0.75rem;border-top:1px solid
       <div class="sh"><span class="sh-title">About</span><div class="sh-line"></div></div>
       <div class="home-grid">
         <div>
-          <p class="about">
-        I'm an evolutionary geneticist interested in the origin and maintenance of variation in genes, traits, and species. My current research focuses on the evolution, ecology, and molecular biology of mating systems as a window into convergent adaptation, the origin of novelty, and the genetic architecture of ecologically significant traits. I am particularly interested in flowering plants as a model for understanding the resolution of sexual conflict in hermaphrodites. Other research interests include population divergence, consequences of hybridization, and temporal niche specialization. I'm currently a Miller Postdoctoral Fellow at UC Berkeley working with Noah Whiteman and Ben Blackman. Prior to this I completed my PhD in Population Biology at UC Davis with Graham Coop. 
-          </p>
-          <div class="gif-wrap">
-            <!-- To add gif: remove .gif-ph div and uncomment:
-            <img src="figure.gif" alt="Description"> -->
-            <div class="gif-ph">[ gif — set src="your-figure.gif" ]</div>
-            <div class="gif-cap">Figure caption.</div>
-          </div>
+          <p class="about">I'm an evolutionary geneticist interested in how natural selection shapes genetic variation and organismal adaptations. My research focuses on the evolution, ecology, genomics, and genetic regulation of mating systems, using flowering plants as models for understanding the resolution of sexual conflict in hermaphrodites and the role of balancing selection in maintaining alternate reproductive strategies in natural populations.
+
+More broadly I work on questions related to hybridization, population divergence, and temporal niche adaptation.
+
+I'm currently a Miller Postdoctoral Fellow at UC Berkeley where I work with Noah Whiteman and Ben Blackman.</p>
         </div>
         <div class="home-photo">
-          <!-- To add photo: remove .home-photo-ph div and uncomment:
-          <img src="photo.jpg" alt="Jeffrey Groh"> -->
-          <div class="home-photo-ph">
-            <span>JG</span>
-            <small>photo here</small>
-          </div>
+          <img src="headshot.jpg" alt="Jeffrey Groh">
         </div>
       </div>
 
-      <div class="sh"><span class="sh-title">Contact</span><div class="sh-line"></div></div>
-      <div class="contact">
-        <div class="c-item">
-          <div class="c-key">email</div>
-          <div class="c-val"><a href="mailto:jgroh@berkeley.edu">jgroh@berkeley.edu</a></div>
-        </div>
-        <div class="c-item">
-          <div class="c-key">github</div>
-          <div class="c-val"><a href="https://github.com/jgroh">github.com/jgroh</a></div>
-        </div>
-      </div>
-
-      <footer>jeffrey groh · 2026</footer>
+      <footer>2026</footer>
     </div>
 
-    <!-- RESEARCH — scrolling sections
-         Copy a .research-section block to add or remove sections. -->
+    <!-- RESEARCH -->
     <div id="research" class="panel">
       <div class="sh"><span class="sh-title">Research</span><div class="sh-line"></div></div>
 
       <div class="research-section">
-        <div class="rs-title">Evolution of Alternating Sexes In Flowering Plants</div>
+        <div class="rs-title">Evolution of Alternating Sexes</div>
         <p class="rs-body"></p>
-        <div class="fig-wrap">
-          <img src="walnut_fig.pdf" alt="Description"> -->
-          <div class="fig-cap">...</div>
+        <p class="rs-body" style="margin-top: 1rem;">Hermaphroditic organisms must balance investment into male and female reproduction and avoid conflict between these two components of fitness. My work investigates the convergent evolution of reciprocal sex alternation strategies in flowering plants as a window into the genetic basis of novelty and genomic consequences of mating systems.</p>
+		<div class="fig-wrap" style="max-width: 450px;">
+		<img src="walnut_fig_simple.png" alt="Description">
+		<div class="fig-cap">Heterodichogamy in walnut.</div>
+
         </div>
       </div>
 
       <div class="research-section">
-        <div class="rs-title">Consequences of Hybridization</div>
-        <p class="rs-body">
-        </p>
-        <div class="fig-wrap">
-          <!-- <img src="figure2.png" alt="Description"> -->
-          <div class="fig-ph">[ figure — set src="figure2.png" or "figure2.gif" ]</div>
-          <div class="fig-cap">...</div>
-        </div>
-      </div>
-
-      <div class="research-section">
-        <div class="rs-title">Population Genomics</div>
+        <div class="rs-title">Hybridization Genomics</div>
         <p class="rs-body"></p>
-        <div class="rs-tags">
-          <span class="tag">bash</span>
-          <span class="tag">Snakemake</span>
-        </div>
+        <p class="rs-body" style="margin-top: 1rem;">Although species are traditionally defined as reproductively isolated groups, hybridization is common and has important evolutionary consequences. My research has investigated how the dynamics of evolutionary forces acting in hybrid populations impacts the distribution of ancestry in the genome.  </p>
         <div class="fig-wrap">
-          <!-- <img src="figure3.png" alt="Description"> -->
-          <div class="fig-ph">[ figure — set src="figure3.png" or "figure3.gif" ]</div>
-          <div class="fig-cap">...</div>
+          <img src="hybridization.png" alt="Description"> 
+          <div class="fig-cap">Spatial variation of hybrid ancestry along a chromosome. </div>
         </div>
       </div>
     </div>
 
-    <!-- PUBLICATIONS — uncomment <ul> block when you have papers -->
+    <!-- PUBLICATIONS -->
     <div id="publications" class="panel">
       <div class="sh"><span class="sh-title">Publications</span><div class="sh-line"></div></div>
-      <!--
+
+      <div class="pub-section-head">In Review / In Press</div>
       <ul class="pub-list">
-        <li class="pub">
-          <span class="pub-year">2024</span>
-          <div>
-            <div class="pub-title">Title of the paper</div>
-            <div class="pub-authors">Groh J, Author B, Author C</div>
-            <div class="pub-venue">Journal Name · Vol(Issue):pages
-              <a class="pub-doi" href="https://doi.org/...">doi ↗</a>
-            </div>
+
+        <li class="pub-item">
+          <strong>Groh JS</strong>, Soares dos Santos MF, Avila de Dios E, Ackerman G†, Solares E, Iturrieta RA, Focht E, Seymour D, Gaut BS, Arpaia ML, Coop G. 2025. Balanced polymorphism in a floral transcription factor underlies an ancient rhythm of daily sex alternation in avocado. <em>bioRxiv</em>. In Review. <a href="https://doi.org/10.64898/2025.12.22.695989">doi ↗</a>
+        </li>
+
+      </ul>
+
+      <div class="pub-section-head">Published</div>
+      <ul class="pub-list">
+
+        <li class="pub-item">
+          Roesti M, <strong>Groh JS</strong>, Jones F, Peichel CL, Schluter D. 2026. Reply to MacColl: Repeated evolution from standing genetic variation. <em>Proceedings of the National Academy of Sciences</em> 123:e2605003123.
+        </li>
+
+        <li class="pub-item">
+          <strong>Groh JS</strong>, Ackerman G†, Wenzel M, Coop G. 2025. Distinct haplotypes and reversed dominance at a single-gene balanced polymorphism controlling heterodichogamy in two genera of wingnuts. <em>Current Biology</em> 35:1–18. <a href="https://doi.org/10.1016/j.cub.2025.09.061">doi ↗</a>
+        </li>
+
+        <li class="pub-item">
+          Roesti M, <strong>Groh JS</strong>, Jones F, Peichel CL, Schluter D. 2025. A species interaction kickstarts ecological speciation in allopatry. <em>Proceedings of the National Academy of Sciences</em> 122:e2506625122. <a href="https://doi.org/10.1073/pnas.2506625122">doi ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-item-inner">
+            <div><strong>Groh JS</strong>, Vik DC†, Davis M, Stevens KA, Brown PJ, Langley CH, Coop G. 2025. Ancient structural variants control sex-specific flowering time morphs in walnuts and hickories. <em>Science</em> 387:eado5578. <span class="pub-note">Cover article.</span> <a href="https://doi.org/10.1126/science.ado5578">doi ↗</a></div>
+            <div class="pub-thumb"><img src="science_cover.png" alt="Science cover"></div>
           </div>
         </li>
+
+        <li class="pub-item">
+          Langdon QK, <strong>Groh JS</strong>, Aguillon SM, et al. 2024. Swordtail fish hybrids reveal that genome evolution is surprisingly predictable after initial hybridization. <em>PLoS Biology</em> 22:e3002742. <a href="https://doi.org/10.1371/journal.pbio.3002742">doi ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <strong>Groh JS</strong>, Coop G. 2023. The temporal and genomic scale of selection following hybridization. <em>Proceedings of the National Academy of Sciences</em> 121:e2309168121. <a href="https://doi.org/10.1073/pnas.2309168121">doi ↗</a>
+        </li>
+
+        <li class="pub-item">
+          James ME, Allsopp RN†, <strong>Groh JS</strong>, Kaur A, Wilkinson MJ, Ortiz-Barrientos D. 2023. Uncovering the genetic architecture of parallel evolution. <em>Molecular Ecology</em> 32:5575–5589. <a href="https://doi.org/10.1111/mec.17120">doi ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <div class="pub-item-inner">
+            <div>Roesti M, <strong>Groh JS</strong>, Blain SA, Huss M, Rassias P, Bolnick DI, Stuart YE, Peichel CL, Schluter D. 2022. Species divergence under competition and shared predation. <em>Ecology Letters</em> 26:111–123. <span class="pub-note">Cover article.</span> <a href="https://doi.org/10.1111/ele.14136">doi ↗</a></div>
+            <div class="pub-thumb"><img src="ecology_letters_cover.png" alt="Ecology Letters cover"></div>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          James ME, Arenas-Castro H, <strong>Groh JS</strong>, Allen SL, Engelstädter J, Ortiz-Barrientos D. 2021. Highly replicated evolution of parapatric ecotypes. <em>Molecular Biology and Evolution</em> 38:4805–4821. <a href="https://doi.org/10.1093/molbev/msab248">doi ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <strong>Groh JS</strong>, Cronk QC. 2020. Phenotypic evidence for an extensive mosaic hybrid zone between two species of columbine, <em>Aquilegia flavescens</em> and <em>A. formosa</em>. <em>Botany</em> 98:459–467. <a href="https://doi.org/10.1139/cjb-2019-0216">doi ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <strong>Groh JS</strong>, Percy DM, Björk CR, Cronk QC. 2019. On the origin of orphan hybrids between <em>Aquilegia formosa</em> and <em>Aquilegia flavescens</em>. <em>AoB Plants</em> 11:ply071. <span class="pub-note">Editor's Choice.</span> <a href="https://doi.org/10.1093/aobpla/ply071">doi ↗</a>
+        </li>
+
       </ul>
-      -->
-      <div class="pub-ph">publications will appear here</div>
+
+      <div style="font-size:10px; color:var(--ink3); margin-top:1.5rem;">† Undergraduate mentee</div>
+
     </div>
 
-    <!-- CV — upload groh_cv.pdf to repo root -->
+    <!-- CV -->
     <div id="cv" class="panel">
       <div class="sh"><span class="sh-title">CV</span><div class="sh-line"></div></div>
       <div class="cv">
@@ -313,7 +272,6 @@ footer{font-size:10px;color:var(--ink3);padding-top:0.75rem;border-top:1px solid
 
   </main>
 </div>
-
 <script>
 function show(id, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
